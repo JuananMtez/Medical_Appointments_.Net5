@@ -46,6 +46,20 @@ namespace dotnet5.Controllers
             return cita;
         }
 
+        [HttpGet("paciente/{idUsuario}")]
+        public async Task<ActionResult<IEnumerable<CitaDTOResponse>>> GetCitasPaciente(int idUsuario)
+        {
+            return await citaService.GetByPaciente(idUsuario);
+
+        }
+
+        [HttpGet("medico/{idUsuario}")]
+        public async Task<ActionResult<IEnumerable<CitaDTOResponse>>> GetCitasMedico(int idUsuario)
+        {
+            return await citaService.GetByMedico(idUsuario);
+
+        }
+
         // PUT: api/Citas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

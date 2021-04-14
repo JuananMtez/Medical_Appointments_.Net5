@@ -158,26 +158,6 @@ namespace dotnet5.Services
 
             Paciente paciente = MapToEntity(pacienteDTO);
 
-
-
-
-            foreach (int id in pacienteDTO.MedicosUsuarioId)
-            {
-                Medico medico = await context.Medicos.Include(m => m.Pacientes).SingleAsync(m => m.UsuarioId == id);
-
-                if (medico is not null)
-                {
-                    medico.Pacientes.Add(paciente);
-                    paciente.Medicos.Add(medico);
-                    context.Entry(medico).State = EntityState.Modified;
-                } else
-                {
-                    return null;
-                }
-            }
-
-
-
             context.Pacientes.Add(paciente);
             await context.SaveChangesAsync();
 
@@ -226,7 +206,7 @@ namespace dotnet5.Services
 
             if (paciente.Citas is not null)
             {
-                pacienteDTO.CitasCitasId = paciente.Citas.Select(c => c.CitaId).ToList();
+                pacienteDTO.CitasCitaId = paciente.Citas.Select(c => c.CitaId).ToList();
 
             }
 

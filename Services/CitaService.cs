@@ -36,7 +36,7 @@ namespace dotnet5.Services
         {
 
 
-            return MapToDTO(await context.Citas.Include(c => c.Paciente).Include(c => c.Medico).Include(c => c.Paciente).SingleAsync(c => c.CitaId == id));
+            return MapToDTO(await context.Citas.Include(c => c.Paciente).Include(c => c.Medico).Include(c => c.Diagnostico).SingleAsync(c => c.CitaId == id));
         }
 
         public async Task<int> Put(int id, CitaDTOPut citaDTO)
@@ -76,8 +76,8 @@ namespace dotnet5.Services
 
 
 
-            Medico medico = await context.Medicos.FindAsync(citaDTO.MedicoId);
-            Paciente paciente = await context.Pacientes.FindAsync(citaDTO.PacienteId);
+            Medico medico = await context.Medicos.FindAsync(citaDTO.MedicoUsuarioId);
+            Paciente paciente = await context.Pacientes.FindAsync(citaDTO.PacienteUsuarioId);
 
 
 
@@ -111,6 +111,20 @@ namespace dotnet5.Services
 
         }
 
+        public async Task<ActionResult<IEnumerable<CitaDTOResponse>>> GetByPaciente(int idUsuario)
+        {
+            IEnumerable<Cita> citas = await context.Citas.Include(c => c.Paciente).Include(c => c.Medico).Include(c => c.Diagnostico).Where(c => c.Paciente.UsuarioId == idUsuario).ToListAsync();
+
+            return citas.Select(c => MapToDTO(c)).ToList();
+        }
+
+        public async Task<ActionResult<IEnumerable<CitaDTOResponse>>> GetByMedico(int idUsuario)
+        {
+            IEnumerable<Cita> citas = await context.Citas.Include(c => c.Paciente).Include(c => c.Medico).Include(c => c.Diagnostico).Where(c => c.Medico.UsuarioId == idUsuario).ToListAsync();
+
+            return citas.Select(c => MapToDTO(c)).ToList();
+        }
+
 
         private CitaDTOResponse MapToDTO(Cita cita)
         {
@@ -131,5 +145,6 @@ namespace dotnet5.Services
         }
 
 
-        }
+
     }
+}

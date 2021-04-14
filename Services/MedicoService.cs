@@ -48,6 +48,18 @@ namespace dotnet5.Services
             }
         }
 
+        public async Task<ActionResult<IEnumerable<MedicoDTOResponse>>> GetAllMedicosPaciente(int idUsuario)
+        {
+
+            Paciente paciente = await context.Pacientes.Include(p => p.Medicos).Include(p => p.Citas).SingleAsync(p => p.UsuarioId == idUsuario);
+
+            List<Medico> medicos = paciente.Medicos.ToList();
+
+            return medicos.Select(m => MapToDTO(m)).ToList();
+
+        }
+
+
         public async Task<int> Put(int id, MedicoDTOPut medicoDTO)
         {
             if (id != medicoDTO.UsuarioId)
@@ -71,14 +83,16 @@ namespace dotnet5.Services
             }
 
 
-
-            foreach (int idCita in medicoDTO.CitasCitaId)
+            if (medicoDTO.CitasCitaId != null)
             {
-                if (!await context.Citas.Where(c => c.CitaId == idCita && c.Medico.UsuarioId == medicoDTO.UsuarioId).AnyAsync())
+                foreach (int idCita in medicoDTO.CitasCitaId)
                 {
-                    return 0;
-                }
+                    if (!await context.Citas.Where(c => c.CitaId == idCita && c.Medico.UsuarioId == medicoDTO.UsuarioId).AnyAsync())
+                    {
+                        return 0;
+                    }
 
+                }
             }
 
 
@@ -169,21 +183,6 @@ namespace dotnet5.Services
             }
             Medico medico = MapToEntity(medicoDTO);
 
-            foreach(int id in medicoDTO.PacientesUsuarioId) {
-
-                Paciente paciente = await context.Pacientes.Include(p => p.Medicos).SingleAsync(p => p.UsuarioId == id);
-
-                if (paciente is not null)
-                {
-                    medico.Pacientes.Add(paciente);
-                    paciente.Medicos.Add(medico);
-                    context.Entry(paciente).State = EntityState.Modified;
-                }
-                else
-                {
-                    return null;
-                }
-            }
 
             context.Medicos.Add(medico);
             await context.SaveChangesAsync();
@@ -225,7 +224,7 @@ namespace dotnet5.Services
 
             if (medico.Citas is not null)
             {
-                medicoDTO.CitasCitasId = medico.Citas.Select(m => m.CitaId).ToList();
+                medicoDTO.CitasCitaId = medico.Citas.Select(m => m.CitaId).ToList();
             }
 
             return medicoDTO;

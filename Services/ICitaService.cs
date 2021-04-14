@@ -15,6 +15,9 @@ namespace CitasMedicas.Services
 
         public Task<CitaDTOResponse> Get(int id);
 
+        public Task<ActionResult<IEnumerable<CitaDTOResponse>>> GetByPaciente(int idUsuario);
+
+        public Task<ActionResult<IEnumerable<CitaDTOResponse>>> GetByMedico(int idUsuario);
 
 
         public Task<int> Put(int id, CitaDTOPut usuarioDTO);

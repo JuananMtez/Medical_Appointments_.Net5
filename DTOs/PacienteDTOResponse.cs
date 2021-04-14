@@ -19,7 +19,7 @@ namespace dotnet5.DTOs
 
 		public List<int> MedicosUsuarioId { get; set; }
 
-		public List<int> CitasCitasId { get; set; }
+		public List<int> CitasCitaId { get; set; }
 
 
     }

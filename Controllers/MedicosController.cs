@@ -45,6 +45,13 @@ namespace dotnet5.Controllers
             return medico;
         }
 
+        [HttpGet("medicos/{idUsuario}")]
+        public async Task<ActionResult<IEnumerable<MedicoDTOResponse>>> GetMedicosPaciente(int idUsuario)
+        {
+            return await medicoService.GetAllMedicosPaciente(idUsuario);
+
+        }
+
         // PUT: api/Medicos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

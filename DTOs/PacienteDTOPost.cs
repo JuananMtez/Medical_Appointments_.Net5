@@ -19,6 +19,5 @@ namespace CitasMedicas.DTOs
         public string Telefono { get; set; }
         public string Direccion { get; set; }
 
-        public List<int> MedicosUsuarioId { get; set; }
     }
 }

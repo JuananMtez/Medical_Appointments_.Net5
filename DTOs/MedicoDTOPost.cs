@@ -14,7 +14,6 @@ namespace CitasMedicas.DTOs
         public string Clave { get; set; }
         public string NumColegiado {get; set; }
 
-        public List<int> PacientesUsuarioId { get; set; }
 
 
 

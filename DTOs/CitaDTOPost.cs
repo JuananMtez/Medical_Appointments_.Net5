@@ -11,8 +11,8 @@ namespace CitasMedicas.DTOs
         public DateTime FechaHora { get; set; }
         public string MotivoCita { get; set; }
 
-        public int PacienteId { get; set; }
+        public int PacienteUsuarioId { get; set; }
 
-        public int MedicoId { get; set; }
+        public int MedicoUsuarioId { get; set; }
     }
 }
