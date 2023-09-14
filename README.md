@@ -1,6 +1,6 @@
 ## About the project
 
-Simple API for the creation of medical appointments. The frontend side is in [Citas_Medicas_Angular](https://github.com/JuananMtez/Citas_Medicas_Angular).
+Simple API for the creation of medical appointments. The frontend side is in [Medical_Appointments_Angular](https://github.com/JuananMtez/Medical_Appointments_Angular).
 
 ### Built With
 ![CSharp]
