@@ -10,6 +10,7 @@ Simple API for the creation of medical appointments. The frontend side is in [Ci
 ### Prerequisites
 * .Net5
 * Oracle Database XE
+* Visual Studio
 
 
 ### Installation
