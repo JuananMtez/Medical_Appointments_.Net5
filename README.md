@@ -15,7 +15,7 @@ Simple API for the creation of medical appointments. The frontend side is in [Ci
 ### Installation
 1. Clone the repo.
 ```sh
-git clone https://github.com/JuananMtez/NeuronLab-Backend.git
+git clone https://github.com/JuananMtez/Medical_Appointments_.Net5.git
 ```
 
 2. Create database in Oracle Database XE
