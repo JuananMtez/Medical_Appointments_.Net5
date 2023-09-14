@@ -4,6 +4,7 @@ Simple API for the creation of medical appointments. The frontend side is in [Ci
 
 ### Built With
 ![CSharp]
+![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
 
 ## Getting Started
 
